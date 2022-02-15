@@ -16,14 +16,21 @@ const provider = new HDWalletProvider(mnemonic, RPC);
   
 const web3 = new Web3(provider);
 
-const testContract = require("../artifacts/contracts/testStore.sol/testStore.json");
+const testContract1 = require("../artifacts/contracts/testStore.sol/testStore.json");
+const testContract2 = require("../artifacts/contracts/testConcat.sol/testConcat.json");
 
-// nft contract address
-const testContAddress = process.env.CONTRACT_ADDRESS;
-console.log(testContAddress)
+// contract address
+const testContAddress1 = process.env.CONTRACT_ADDRESS1;
+console.log(testContAddress1)
+const testContAddress2 = process.env.CONTRACT_ADDRESS2;
+console.log(testContAddress2)
 
-let contInst = new web3.eth.Contract(
-  testContract.abi, testContAddress
+let contInst1 = new web3.eth.Contract(
+  testContract1.abi, testContAddress1
+)
+
+let contInst2 = new web3.eth.Contract(
+  testContract2.abi, testContAddress2
 )
 
 async function callSC(baseURI:string) {
@@ -43,16 +50,28 @@ async function callSC(baseURI:string) {
     {
       let transactionResult: TransactionReceipt;  
       
-      transactionResult = await contInst.methods.assemblyStorage().call()
+      transactionResult = await contInst1.methods.assemblyStorage().call()
       console.log(util.inspect(transactionResult));
 
-      transactionResult = await contInst.methods.encode(1,2,3,4).send(sendOption)
+      transactionResult = await contInst1.methods.encode(1,2,3,4).send(sendOption)
       console.log(util.inspect(transactionResult));
 
-      transactionResult = await contInst.methods.getStoreValue().call()
+      transactionResult = await contInst1.methods.getStoreValue().call()
       console.log(util.inspect(transactionResult));
 
-      transactionResult = await contInst.methods.decode().call()
+      transactionResult = await contInst1.methods.decode().call()
+      console.log(util.inspect(transactionResult));
+
+      transactionResult = await contInst2.methods.exFunction1().call()
+      console.log(util.inspect(transactionResult));
+
+      transactionResult = await contInst2.methods.getValue().call()
+      console.log(util.inspect(transactionResult));
+
+      transactionResult = await contInst2.methods.exFunction2().call()
+      console.log(util.inspect(transactionResult));
+
+      transactionResult = await contInst2.methods.getValue().call()
       console.log(util.inspect(transactionResult));
     }
   
