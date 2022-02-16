@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 contract testConcat {
     string public a;
     string public b;
+    string public c = "testme";
 
     function exFunction1 () external {
         a = string(abi.encode("hello", " world"));
@@ -24,8 +25,9 @@ contract testConcat {
         b = string(abi.encodePacked(y, nonce));
     }
 
-    function getValue() public view returns (string memory, string memory) {
-      return (a, b);
+    function getValue() public view returns (
+      string memory, string memory, string memory) {
+      return (a, b, c);
     }
 
     
