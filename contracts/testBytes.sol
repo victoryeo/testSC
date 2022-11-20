@@ -4,6 +4,13 @@ pragma solidity ^0.8.0;
 contract StorageBytes {
     bytes  valBytes;
     address public my_address;
+    bytes public goon = new bytes(10);
+    bytes[] public hklid;
+
+    function fill_hklid(bytes memory _arg) public {
+      hklid.push(_arg);
+      goon = _arg;
+    }
 
     function getBytes() public view returns(bytes memory) {
         return valBytes;
