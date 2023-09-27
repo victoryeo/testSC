@@ -18,15 +18,15 @@ const erc721Contract = require("../abi/ExampleErc721.json");
 const genericContract = require("../abi/Generic.json");
 
 // contract address
-const testContAddress1 = '0xaef74d4130a199d644A4BF3a13A3D3EF42eBb0a2';
-console.log(testContAddress1)
+const erc721ContAddress = '0xaef74d4130a199d644A4BF3a13A3D3EF42eBb0a2';
+console.log(erc721ContAddress)
 const genericContAddress = '0xd9a57b902a52988a1BB7da7c86Db5c4e65ab5196';
 console.log(genericContAddress)
 
 const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 const wallet = new ethers.Wallet(privateKey, provider);
 const erc721Instance = new ethers.Contract(
-  testContAddress1,
+  erc721ContAddress,
   erc721Contract,
   wallet
 );
