@@ -1,3 +1,6 @@
+### how to run the typescript code
+npx hardhat run scripts/quorumSC.ts
+
 ### test smart contract written in solidity
 #### testStore.sol  
 test mload, sload, mstore
