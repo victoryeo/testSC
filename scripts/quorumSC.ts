@@ -10,7 +10,7 @@ dotenv.config();
 //without 0x prefix
 const privateKey = 'b2cc9877079f7d399f34d33cc1e2ba37b544c0c5177e72b0d1740f0e75d10125';
 
-//rpc with bpaas api key
+//quorum blockchain rpc with bpaas api key
 const rpcUrl = 'https://node1-1b40.gke-singapore.settlemint.com/bpaas-12B4AE7e6E6CF6838cd89C32C6DB9c5dBD72acDf';
 
 //abi of the contract
