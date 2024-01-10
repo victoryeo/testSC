@@ -39,7 +39,8 @@ contract Delegation {
   );
   event Msg02 (
     bool result,
-    address delegate
+    address delegate,
+    address toSee
   );
 
   constructor(address _delegateAddress)  {
@@ -52,7 +53,7 @@ contract Delegation {
 
   fallback() external {
     (bool result,) = address(delegateInst).delegatecall(msg.data);
-    emit Msg02(result, address(delegateInst));
+    emit Msg02(result, address(delegateInst), address(this));
   }
 }
 
