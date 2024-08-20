@@ -2,27 +2,30 @@
 pragma solidity 0.8.4;
 
 contract FunctionFallback {
-    event LogSelector(bytes4, uint256);
+
     uint256 public globalsize;
     struct DiamondStorage {
         uint256 param1;
-        address[] facetAddresses;
-        mapping(bytes4 => bool) supportedInterfaces;
+        //address[] facetAddresses;
+        //mapping(bytes4 => bool) supportedInterfaces;
     }
+    event LogSelector(bytes4, uint256);
 
 	fallback() external {
         DiamondStorage storage ds;
         // Assuming the first 4 bytes of calldata are the function selector
-        uint256 sourceLocation = 0x0;
+        uint256 sourceLocation = 0x4;
         uint256 size = 32;
+        uint256 tmpstr = 0;
 
         assembly {
-            ds.slot := 0
-            calldatacopy(ds.slot, sourceLocation, size)
+            ds.slot := 1
+            calldatacopy(0, sourceLocation, size)
+            tmpstr := mload(0)
         }
         // it will emit msg.sig of 0 because
         // fallback function signature is 0
-		emit LogSelector(msg.sig, ds.param1);
+		emit LogSelector(msg.sig, tmpstr);
 	}
 
 	function foo(uint256 _value, uint256 _myaddr) external returns (uint256) {
