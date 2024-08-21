@@ -9,7 +9,7 @@ contract FunctionFallback {
         //address[] facetAddresses;
         //mapping(bytes4 => bool) supportedInterfaces;
     }
-    event LogSelector(bytes4, uint256);
+    event LogSelector(bytes4, uint256, uint256);
 
 	fallback() external {
         DiamondStorage storage ds;
@@ -17,15 +17,18 @@ contract FunctionFallback {
         uint256 sourceLocation = 0x4;
         uint256 size = 32;
         uint256 tmpstr = 0;
+        uint256 myaddrsize;
 
         assembly {
             ds.slot := 1
             calldatacopy(0, sourceLocation, size)
             tmpstr := mload(0)
+            let temp := address()
+            myaddrsize := extcodesize(temp)
         }
         // it will emit msg.sig of 0 because
         // fallback function signature is 0
-		emit LogSelector(msg.sig, tmpstr);
+		emit LogSelector(msg.sig, tmpstr, myaddrsize);
 	}
 
 	function foo(uint256 _value, uint256 _myaddr) external returns (uint256) {
