@@ -22,13 +22,27 @@ const rinkebyUrl = `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`;
  */
 export default {
 	solidity: {
-		version: '0.8.0',
-		settings: {
-			optimizer: {
-				enabled: true,
-				runs: 200,
+		compilers: [{
+				version: '0.8.0',
+				settings: {
+					optimizer: {
+						enabled: true,
+						runs: 200,
+					},
+				},
 			},
-		},
+			{
+				version: '0.8.4',
+				settings: {
+					optimizer: {
+						enabled: true,
+						runs: 200,
+					},
+				},
+			}
+		]
+
+		
 	},
 	defaultNetwork: 'local',
 	networks: {
