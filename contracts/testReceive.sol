@@ -40,6 +40,8 @@ contract TestReceive {
     event Deployed(address addr);
     event Received(address, uint);
     event Fallbacked(address, uint);
+    event Refund(address, bool, bytes);
+
     uint y;
 
     constructor() {
@@ -52,5 +54,13 @@ contract TestReceive {
     fallback() external payable { 
         emit Fallbacked(msg.sender, msg.value);
         y = msg.value; 
+    }
+
+    function refund(address to, uint256 amount) public payable {
+        (bool sent, bytes memory data) = to.call{
+            value: amount
+        }("");
+        require(sent, "Failed to send Ether");
+        emit Refund(to, sent, data);
     }
 }
